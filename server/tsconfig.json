@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "sourceMap": false,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "commonjs",
+    "target": "es2016",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+  },
+  "include": [
+    "src",
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+  "ts-node": {
+    "transpileOnly": true,
+    "swc": true
+  }
+}
