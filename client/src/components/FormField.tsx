@@ -12,7 +12,7 @@ const FormField = ({
   type: React.HTMLInputTypeAttribute,
   name: string,
   placeholder: string,
-  handleChange: () => void,
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   value: string,
   isSurpriseMe?: boolean,
   handleSurpriseMe?: () => void,
