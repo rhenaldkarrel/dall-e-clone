@@ -7,7 +7,7 @@ import { FormField, Loader } from "../components"
 
 const CreatePost = () => {
   const navigate = useNavigate()
-  
+
   const [form, setForm] = useState({
     name: "",
     prompt: "",
@@ -24,7 +24,7 @@ const CreatePost = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
-      [e.target.name]: [e.target.value]
+      [e.target.name]: e.target.value
     })
   }
 
@@ -36,8 +36,36 @@ const CreatePost = () => {
     })
   }
 
-  const generateImage = () => {
+  const generateImage = async () => {
+    if(form.prompt == "" || /^\s/.test(form.prompt)) {
+      alert("Please enter a prompt!")
+      setForm({ ...form, prompt: "" })
+      return
+    }
 
+    if (form.prompt) {
+      try {
+        setGeneratingImg(true)
+
+        console.log(form.prompt)
+
+        const response = await fetch("http://localhost:8080/api/v1/dalle", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ prompt: form.prompt }),
+        })
+
+        const data = await response.json()
+
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` })
+      } catch (err) {
+        alert(err)
+      } finally {
+        setGeneratingImg(false)
+      }
+    }
   }
 
   return (
