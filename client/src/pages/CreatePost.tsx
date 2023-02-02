@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import preview from "../assets/preview.png"
@@ -17,8 +17,47 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
 
+    if (
+      !form.name ||
+      !form.prompt ||
+      /^\s/.test(form.prompt) ||
+      /^\s/.test(form.name)
+    ) {
+      alert("Please filled out the form correctly!")
+      return
+    }
+
+    if (
+        !form.photo || 
+        /^\s/.test(form.photo)
+    ) {
+      alert("Please generate an image using the prompt!")
+      return
+    }
+
+    if (form.prompt && form.photo) {
+      setLoading(true)
+
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        })
+
+        await response.json()
+        navigate("/")
+      } catch (err) {
+        alert(err)
+      } finally {
+        setLoading(false)
+      }
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
