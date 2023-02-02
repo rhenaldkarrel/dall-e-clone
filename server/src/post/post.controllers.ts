@@ -51,3 +51,19 @@ export async function createPost(req: Request, res: Response) {
     })
   }
 }
+
+export async function getAllPosts(req: Request, res: Response) {
+  try {
+    const posts = await Post.find({})
+
+    res.status(200).json({
+      success: true,
+      data: posts,
+    })
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err,
+    })
+  }
+}
