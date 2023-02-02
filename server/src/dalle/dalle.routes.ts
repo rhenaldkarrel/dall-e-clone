@@ -1,15 +1,11 @@
 import express from "express"
 import * as dotenv from "dotenv"
-import { Configuration, OpenAIApi } from "openai"
+import { generateImage } from "./dalle.controllers"
 
 dotenv.config()
 
 const router = express.Router()
 
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY
-})
-
-const openai = new OpenAIApi(config)
+router.post("/", generateImage)
 
 export default router
