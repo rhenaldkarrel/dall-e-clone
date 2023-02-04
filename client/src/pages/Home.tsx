@@ -6,7 +6,7 @@ const RenderCards = ({
   data,
   title
 }: {
-  data: any[],
+  data: TPostData[],
   title: string
 }) => {
   if (data?.length > 0) {
@@ -24,9 +24,9 @@ const RenderCards = ({
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
-  const [allPosts, setAllPosts] = useState<any[]>([])
+  const [allPosts, setAllPosts] = useState<TPostData[]>([])
   const [searchText, setSearchText] = useState("")
-  const [searchedResults, setSearchedResults] = useState<any[]>([])
+  const [searchedResults, setSearchedResults] = useState<TPostData[]>([])
   const [searchTimeout, setSearchTimeout] = useState<any>()
 
   useEffect(() => {

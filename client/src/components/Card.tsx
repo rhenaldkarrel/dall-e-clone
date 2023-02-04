@@ -6,12 +6,7 @@ const Card = ({
   name,
   prompt,
   photo,
-}: {
-  _id: string,
-  name: string,
-  prompt: string,
-  photo: string,
-}) => {
+}: TPostData) => {
   return (
     <div className="rounded-xl group relative shadow-card hover:shadow-cardhover card">
       <img
