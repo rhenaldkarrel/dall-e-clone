@@ -25,7 +25,7 @@ const Card = ({
           </div>
           <button
             type="button" 
-            onClick={() => downloadImage(_id, photo)}
+            onClick={() => downloadImage({ _id, photo })}
             className="outline-none bg-transparent"
           >
             <img src={download} alt="download" className="w-6 h-6 object-contain invert" />
