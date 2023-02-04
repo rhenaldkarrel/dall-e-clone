@@ -7,12 +7,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "node ./scripts/dev",
-    "install": "node ./scripts/install"
+    "install": "node ./scripts/install",
+    "build": "node ./scripts/build"
   },
   "devDependencies": {
     "concurrently": "^7.6.0"
   },
   "dependencies": {
-    "chalk": "4.1.2"
+    "chalk": "4.1.2",
+    "fs-extra": "^11.1.0"
   }
 }
