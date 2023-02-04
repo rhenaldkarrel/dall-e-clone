@@ -1,0 +1,17 @@
+{
+  "name": "dall-e-clone",
+  "version": "1.0.0",
+  "description": "MERN + TypeScript AI Image Generation Application",
+  "repository": "https://github.com/rhenaldkarrel/dall-e-clone.git",
+  "author": "Rhenald <renaldkarel@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node ./scripts/dev"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "chalk": "4.1.2"
+  }
+}
