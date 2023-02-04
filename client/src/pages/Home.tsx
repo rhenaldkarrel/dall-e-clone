@@ -12,7 +12,7 @@ const RenderCards = ({
   if (data?.length > 0) {
     return <>{
       data.map(post => (
-        <Card key={post.id} {...post} />
+        <Card key={post._id} {...post} />
       ))
     }</>
   }
