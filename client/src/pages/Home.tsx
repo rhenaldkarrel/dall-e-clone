@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, ChangeEvent } from "react"
 
 import { Loader, FormField, Card } from "../components"
 
@@ -24,8 +24,10 @@ const RenderCards = ({
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
-  const [allPosts, setAllPosts] = useState([])
+  const [allPosts, setAllPosts] = useState<any[]>([])
   const [searchText, setSearchText] = useState("")
+  const [searchedResults, setSearchedResults] = useState<any[]>([])
+  const [searchTimeout, setSearchTimeout] = useState<any>()
 
   useEffect(() => {
     (async () => {
@@ -52,6 +54,21 @@ const Home = () => {
     })()
   }, [])
 
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    clearTimeout(searchTimeout)
+    setSearchText(e.target.value)
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = allPosts.filter(
+          (p) => p.name.toLowerCase().includes(searchText.toLowerCase()) || p.prompt.toLowerCase().includes(searchText.toLowerCase())
+        )
+
+        setSearchedResults(searchResult)
+      }, 500)
+    )
+  };
+
   return (
     <section className="max-w-7xl mx-auto">
       <header>
@@ -61,7 +78,14 @@ const Home = () => {
         </p>
       </header>
       <div className="mt-16">
-        <FormField />
+        <FormField
+          labelName="Search posts"
+          type="text"
+          name="text"
+          placeholder="Search posts..."
+          value={searchText}
+          handleChange={handleSearchChange}
+        />
       </div>
       <div className="mt-10">
         {loading ? (
@@ -78,7 +102,7 @@ const Home = () => {
             <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
               {searchText ? (
                 <RenderCards
-                  data={allPosts}
+                  data={searchedResults}
                   title="No search results found"
                 />
               ) : (
