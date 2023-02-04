@@ -6,7 +6,8 @@
   "author": "Rhenald <renaldkarel@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./scripts/dev"
+    "dev": "node ./scripts/dev",
+    "install": "node ./scripts/install"
   },
   "devDependencies": {
     "concurrently": "^7.6.0"
